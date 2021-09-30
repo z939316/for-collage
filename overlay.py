@@ -1,16 +1,21 @@
 import cv2
 import numpy as np
-path1 = 'F:/python/photo/overlay/1.jpg'
-path2 = 'F:/python/photo/overlay/2.jpg'
-path3 = 'F:/python/photo/overlay/3.jpg'
-path4 = 'F:/python/photo/overlay/4.jpg'
-img1 = cv2.imread(path1)
-img2 = cv2.imread(path2)
-img3 = cv2.imread(path3)
-img4 = cv2.imread(path4)
-endimg = cv2.imread(path4)
-imga = cv2.addWeighted(img1,0.5,img2,0.5,0)
-imgb = cv2.addWeighted(img3,0.5,img4,0.5,0)
-endimg = cv2.addWeighted(imga,0.5,imgb,0.5,0)
-cv2.imwrite('print2.jpg',endimg)
+import time
+import os
+n=0
+path=os.path.dirname(os.path.abspath(__file__))
+listimg=[]
+for filename in os.listdir(path): 
+    if "jpg" not in filename and "png" not in filename:     
+        continue
+    n+=1
+    globals()[filename] = cv2.imread(filename)
+    listimg.append(filename)
+printimg=globals()[listimg[0]]
+printimg=cv2.addWeighted(globals()[listimg[0]],0.5,globals()[listimg[1]],0.5,0)
+
+if n>2:
+    for i in range(len(listimg)-2):
+        printimg=cv2.addWeighted(printimg,(i+2)/(i+3),globals()[listimg[i+2]],1-(i+2)/(i+3),0)
+cv2.imwrite('print100.jpg',printimg) 
 
