@@ -3,14 +3,12 @@ from selenium.webdriver.chrome.options import Options
 import time
 from selenium.webdriver.common.keys import Keys
 
-code = 'xojfgtsetv'
+code = 'xojfgtsetv'#會議代碼
 account='810293@stu.nknush.kh.edu.tw'
 password="***********"
-#會議代碼
 
 
-
-#alist=[]#學生名單，為了保護個資所以刪除
+alist=["王XX","蘇XX","黃XX"]
 opt = Options()
 opt.add_argument("--disable-infobars")
 opt.add_argument("start-maximized")
@@ -28,12 +26,12 @@ driver = webdriver.Chrome(options=opt, executable_path='C:\Program Files (x86)\c
 meetpath="https://accounts.google.com/ServiceLogin?ltmpl=meet&continue=https%3A%2F%2Fmeet.google.com%3Fhs%3D193&"
 driver.get(meetpath)
 driver.find_element_by_name('identifier').send_keys(account)
-#帳號
+#輸入帳號
 
 driver.find_element_by_xpath("//*[@id='identifierNext']").click()
 time.sleep(2)
 driver.find_element_by_name('password').send_keys(password)
-#密碼
+#輸入密碼
 
 driver.find_element_by_xpath('//*[@id="passwordNext"]').click()
 time.sleep(3)
@@ -64,7 +62,6 @@ if f==0:
 driver.find_element_by_name('chatTextInput').send_keys(ur)
 driver.find_element_by_name('chatTextInput').send_keys(Keys.ENTER)
 
-#print(ur)
 
 
 
